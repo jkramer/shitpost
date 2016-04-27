@@ -41,6 +41,7 @@ helper shit_score => sub {
   $score{addressing} += 15 while $title =~ /\b(?:[Dd]u|Sie|Ihr(?:en?)?|[Uu]ns(?:ere?)?|[mMdD]eine?|[MmdD]?ich|[mMdDwW]ir)\b/ig;
   $score{quote} += 10 if $title =~ /"[^"]+"/;
   $score{excessive_length} += 2.5 * max(0, scalar(split /[^\w-]+/, $title) - 10);
+  $score{alliteration} += 25 if $title =~ /(?:([A-Z])\w+)(?:\W+\1\w+){2,}/;
 
   for(@chunks) {
     my @words = split /[\s,]+/;
