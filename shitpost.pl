@@ -38,7 +38,7 @@ helper shit_score => sub {
   $score{question_mark} = 15 if $title =~ /\?/;
   $score{exclamation_mark} = 10 if $title =~ /!/;
   $score{chunked} = 5 if @chunks > 1;
-  $score{addressing} += 15 while $title =~ /\b(?:[Dd]u|Sie|Ihr(?:en?)?|[Uu]ns(?:ere?)?|[mMdD]eine?|[MmdD]ich|[mMdDwW]ir)\b/ig;
+  $score{addressing} += 15 while $title =~ /\b(?:[Dd]u|Sie|Ihr(?:en?)?|[Uu]ns(?:ere?)?|[mMdD]eine?|[MmdD]?ich|[mMdDwW]ir)\b/ig;
   $score{excessive_length} += 2.5 * max(0, scalar(split /[^\w-]+/, $title) - 10);
 
   for(@chunks) {
