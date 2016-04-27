@@ -2,7 +2,7 @@
 
 use Mojolicious::Lite;
 
-use List::Util 'sum0';
+use List::Util qw'sum0 max';
 
 plugin 'config';
 
@@ -39,6 +39,7 @@ helper shit_score => sub {
   $score{exclamation_mark} = 10 if $title =~ /!/;
   $score{chunked} = 5 if @chunks > 1;
   $score{addressing} += 15 while $title =~ /\b(?:[Dd]u|Sie|Ihr(?:en?)?|[Uu]ns(?:ere?)?|[mMdD]eine?|[MmdD]ich|[mMdDwW]ir)\b/ig;
+  $score{excessive_length} += 2.5 * max(0, scalar(split /[^\w-]+/, $title) - 10);
 
   for(@chunks) {
     my @words = split /[\s,]+/;
